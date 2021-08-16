@@ -15,7 +15,7 @@ if(!location.search){
 else if(location.search.includes("?id=")){
     let id = location.search.substring(4);
     if(isNaN(id) || !madlibs[id]){
-        location.href="/";
+        location.href=".";
     }
     else{
         document.getElementById("info").textContent = "Enter words below: :)";
@@ -51,6 +51,6 @@ else if(location.search.includes("?id=")){
     }
 }
 else{
-    location.href="/";
+    location.href=".";
 }
 
