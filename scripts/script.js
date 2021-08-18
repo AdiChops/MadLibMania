@@ -10,7 +10,7 @@ if(!location.search){
     console.log(listHtml)
 
     document.getElementById("madlibs").innerHTML = listHtml;
-    document.getElementById("info").textContent = "Pick from one of the stories below: :D";
+    document.getElementById("info").textContent = "Pick from one of the stories below: 😁";
 }
 else if(location.search.includes("?id=")){
     let id = location.search.substring(4);
@@ -18,7 +18,7 @@ else if(location.search.includes("?id=")){
         location.href=".";
     }
     else{
-        document.getElementById("info").textContent = "Enter words below: :)";
+        document.getElementById("info").textContent = "Enter words below: 😊";
         document.getElementById("link").style.display = "block";
         let blankBoxes = [];
         madlibs[id].blanks.forEach((blank)=>{
@@ -35,17 +35,31 @@ else if(location.search.includes("?id=")){
         let btn = document.createElement("button");
         btn.textContent = "Reveal my Story!";
         btn.addEventListener("click", ()=>{
-            let para = document.createElement("p");
             let st = "";
+            let isValid = true;
             let i;
             for(i=0; i < madlibs[id].story.length-1; i++){
                 st += madlibs[id].story[i];
                 console.log(blankBoxes[i]);
-                st += blankBoxes[i].value;
+                st += `<span class="blank">${blankBoxes[i].value}</span>`;
+                if(!blankBoxes[i].value){
+                    alert("Please fill out every field.")
+                    isValid = false;
+                    break;
+                }
             }
             st += madlibs[id].story[i];
-            para.textContent = st;
-            document.getElementById("story").appendChild(para)
+            if(isValid){
+                if(!document.getElementById("content")){
+                    let para = document.createElement("p");
+                    para.setAttribute("id", "content");
+                    para.innerHTML = st;
+                    document.getElementById("story").appendChild(para)
+                }
+                else{
+                    document.getElementById("content").innerHTML = st;
+                }
+            }
         });
         document.getElementById("story").appendChild(btn)
     }

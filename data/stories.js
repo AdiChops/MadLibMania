@@ -4,7 +4,7 @@ export default
         "id":0,
         "title":"My MadLib Game",
         "blanks":[
-            "a noun",
+            "an adjective",
             "a verb",
             "an adverb",
             "a type of food"
